@@ -7,7 +7,7 @@ import Pagination from '../components/Pagination';
 const ITEMS_PER_PAGE = 10; 
 
 const CompanyList: React.FC = () => {
-  const { companies, loading, error } = useCompany();
+  const { companies = [], loading, error } = useCompany();
   const [search, setSearch] = useState('');
   const [industry, setIndustry] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +33,7 @@ const CompanyList: React.FC = () => {
 
   return (
     <div className="p-4 md:p-8">
-    
+      {/* Filter + Sort */}
       <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-6">
         <FilterBar search={search} setSearch={setSearch} industry={industry} setIndustry={setIndustry} />
         <button
@@ -44,6 +44,7 @@ const CompanyList: React.FC = () => {
         </button>
       </div>
 
+      {/* Company Cards */}
       {paginated.length === 0 ? (
         <p className="text-center mt-10">No companies found.</p>
       ) : (
@@ -54,7 +55,7 @@ const CompanyList: React.FC = () => {
         </div>
       )}
 
-      
+      {/* Pagination */}
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
